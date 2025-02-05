@@ -11,8 +11,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
-import 'example.dart' as _i3;
-export 'example.dart';
+import 'genre.dart' as _i3;
+import 'now_playing_movie.dart' as _i4;
+import 'package:minidartserver_server/src/generated/now_playing_movie.dart'
+    as _i5;
+export 'genre.dart';
+export 'now_playing_movie.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -31,11 +35,26 @@ class Protocol extends _i1.SerializationManagerServer {
     Type? t,
   ]) {
     t ??= T;
-    if (t == _i3.Example) {
-      return _i3.Example.fromJson(data) as T;
+    if (t == _i3.Genre) {
+      return _i3.Genre.fromJson(data) as T;
     }
-    if (t == _i1.getType<_i3.Example?>()) {
-      return (data != null ? _i3.Example.fromJson(data) : null) as T;
+    if (t == _i4.NowPlayingMovie) {
+      return _i4.NowPlayingMovie.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i3.Genre?>()) {
+      return (data != null ? _i3.Genre.fromJson(data) : null) as T;
+    }
+    if (t == _i1.getType<_i4.NowPlayingMovie?>()) {
+      return (data != null ? _i4.NowPlayingMovie.fromJson(data) : null) as T;
+    }
+    if (t == List<_i3.Genre>) {
+      return (data as List).map((e) => deserialize<_i3.Genre>(e)).toList()
+          as dynamic;
+    }
+    if (t == List<_i5.NowPlayingMovie>) {
+      return (data as List)
+          .map((e) => deserialize<_i5.NowPlayingMovie>(e))
+          .toList() as dynamic;
     }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
@@ -47,8 +66,11 @@ class Protocol extends _i1.SerializationManagerServer {
   String? getClassNameForObject(Object? data) {
     String? className = super.getClassNameForObject(data);
     if (className != null) return className;
-    if (data is _i3.Example) {
-      return 'Example';
+    if (data is _i3.Genre) {
+      return 'Genre';
+    }
+    if (data is _i4.NowPlayingMovie) {
+      return 'NowPlayingMovie';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -63,8 +85,11 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName is! String) {
       return super.deserializeByClassName(data);
     }
-    if (dataClassName == 'Example') {
-      return deserialize<_i3.Example>(data['data']);
+    if (dataClassName == 'Genre') {
+      return deserialize<_i3.Genre>(data['data']);
+    }
+    if (dataClassName == 'NowPlayingMovie') {
+      return deserialize<_i4.NowPlayingMovie>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);

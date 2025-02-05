@@ -11,37 +11,37 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 
-abstract class Example implements _i1.SerializableModel {
-  Example._({
+abstract class Genre implements _i1.SerializableModel {
+  Genre._({
+    required this.id,
     required this.name,
-    required this.data,
   });
 
-  factory Example({
+  factory Genre({
+    required int id,
     required String name,
-    required int data,
-  }) = _ExampleImpl;
+  }) = _GenreImpl;
 
-  factory Example.fromJson(Map<String, dynamic> jsonSerialization) {
-    return Example(
+  factory Genre.fromJson(Map<String, dynamic> jsonSerialization) {
+    return Genre(
+      id: jsonSerialization['id'] as int,
       name: jsonSerialization['name'] as String,
-      data: jsonSerialization['data'] as int,
     );
   }
 
+  int id;
+
   String name;
 
-  int data;
-
-  Example copyWith({
+  Genre copyWith({
+    int? id,
     String? name,
-    int? data,
   });
   @override
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
-      'data': data,
     };
   }
 
@@ -51,23 +51,23 @@ abstract class Example implements _i1.SerializableModel {
   }
 }
 
-class _ExampleImpl extends Example {
-  _ExampleImpl({
+class _GenreImpl extends Genre {
+  _GenreImpl({
+    required int id,
     required String name,
-    required int data,
   }) : super._(
+          id: id,
           name: name,
-          data: data,
         );
 
   @override
-  Example copyWith({
+  Genre copyWith({
+    int? id,
     String? name,
-    int? data,
   }) {
-    return Example(
+    return Genre(
+      id: id ?? this.id,
       name: name ?? this.name,
-      data: data ?? this.data,
     );
   }
 }

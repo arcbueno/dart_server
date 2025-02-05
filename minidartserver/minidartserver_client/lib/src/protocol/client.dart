@@ -11,19 +11,28 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod_client/serverpod_client.dart' as _i1;
 import 'dart:async' as _i2;
-import 'protocol.dart' as _i3;
+import 'package:minidartserver_client/src/protocol/now_playing_movie.dart'
+    as _i3;
+import 'protocol.dart' as _i4;
 
 /// {@category Endpoint}
-class EndpointExample extends _i1.EndpointRef {
-  EndpointExample(_i1.EndpointCaller caller) : super(caller);
+class EndpointMovies extends _i1.EndpointRef {
+  EndpointMovies(_i1.EndpointCaller caller) : super(caller);
 
   @override
-  String get name => 'example';
+  String get name => 'movies';
 
-  _i2.Future<String> hello(String name) => caller.callServerEndpoint<String>(
-        'example',
-        'hello',
-        {'name': name},
+  _i2.Future<String> ping() => caller.callServerEndpoint<String>(
+        'movies',
+        'ping',
+        {},
+      );
+
+  _i2.Future<List<_i3.NowPlayingMovie>> nowPlaying() =>
+      caller.callServerEndpoint<List<_i3.NowPlayingMovie>>(
+        'movies',
+        'nowPlaying',
+        {},
       );
 }
 
@@ -43,7 +52,7 @@ class Client extends _i1.ServerpodClientShared {
     bool? disconnectStreamsOnLostInternetConnection,
   }) : super(
           host,
-          _i3.Protocol(),
+          _i4.Protocol(),
           securityContext: securityContext,
           authenticationKeyManager: authenticationKeyManager,
           streamingConnectionTimeout: streamingConnectionTimeout,
@@ -53,13 +62,13 @@ class Client extends _i1.ServerpodClientShared {
           disconnectStreamsOnLostInternetConnection:
               disconnectStreamsOnLostInternetConnection,
         ) {
-    example = EndpointExample(this);
+    movies = EndpointMovies(this);
   }
 
-  late final EndpointExample example;
+  late final EndpointMovies movies;
 
   @override
-  Map<String, _i1.EndpointRef> get endpointRefLookup => {'example': example};
+  Map<String, _i1.EndpointRef> get endpointRefLookup => {'movies': movies};
 
   @override
   Map<String, _i1.ModuleEndpointCaller> get moduleLookup => {};

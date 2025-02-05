@@ -1,2 +1,3 @@
-example:
-  - hello:
+movies:
+  - ping:
+  - nowPlaying:

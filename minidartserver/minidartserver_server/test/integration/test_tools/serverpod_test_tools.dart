@@ -14,6 +14,8 @@
 import 'package:serverpod_test/serverpod_test.dart' as _i1;
 import 'package:serverpod/serverpod.dart' as _i2;
 import 'dart:async' as _i3;
+import 'package:minidartserver_server/src/generated/now_playing_movie.dart'
+    as _i4;
 import 'package:minidartserver_server/src/generated/protocol.dart';
 import 'package:minidartserver_server/src/generated/endpoints.dart';
 export 'package:serverpod_test/serverpod_test_public_exports.dart';
@@ -73,7 +75,7 @@ void withServerpod(
 }
 
 class TestEndpoints {
-  late final _ExampleEndpoint example;
+  late final _MoviesEndpoint movies;
 }
 
 class _InternalTestEndpoints extends TestEndpoints
@@ -83,15 +85,15 @@ class _InternalTestEndpoints extends TestEndpoints
     _i2.SerializationManager serializationManager,
     _i2.EndpointDispatch endpoints,
   ) {
-    example = _ExampleEndpoint(
+    movies = _MoviesEndpoint(
       endpoints,
       serializationManager,
     );
   }
 }
 
-class _ExampleEndpoint {
-  _ExampleEndpoint(
+class _MoviesEndpoint {
+  _MoviesEndpoint(
     this._endpointDispatch,
     this._serializationManager,
   );
@@ -100,28 +102,52 @@ class _ExampleEndpoint {
 
   final _i2.SerializationManager _serializationManager;
 
-  _i3.Future<String> hello(
-    _i1.TestSessionBuilder sessionBuilder,
-    String name,
-  ) async {
+  _i3.Future<String> ping(_i1.TestSessionBuilder sessionBuilder) async {
     return _i1.callAwaitableFunctionAndHandleExceptions(() async {
       var _localUniqueSession =
           (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
-        endpoint: 'example',
-        method: 'hello',
+        endpoint: 'movies',
+        method: 'ping',
       );
       try {
         var _localCallContext = await _endpointDispatch.getMethodCallContext(
           createSessionCallback: (_) => _localUniqueSession,
-          endpointPath: 'example',
-          methodName: 'hello',
-          parameters: _i1.testObjectToJson({'name': name}),
+          endpointPath: 'movies',
+          methodName: 'ping',
+          parameters: _i1.testObjectToJson({}),
           serializationManager: _serializationManager,
         );
         var _localReturnValue = await (_localCallContext.method.call(
           _localUniqueSession,
           _localCallContext.arguments,
         ) as _i3.Future<String>);
+        return _localReturnValue;
+      } finally {
+        await _localUniqueSession.close();
+      }
+    });
+  }
+
+  _i3.Future<List<_i4.NowPlayingMovie>> nowPlaying(
+      _i1.TestSessionBuilder sessionBuilder) async {
+    return _i1.callAwaitableFunctionAndHandleExceptions(() async {
+      var _localUniqueSession =
+          (sessionBuilder as _i1.InternalTestSessionBuilder).internalBuild(
+        endpoint: 'movies',
+        method: 'nowPlaying',
+      );
+      try {
+        var _localCallContext = await _endpointDispatch.getMethodCallContext(
+          createSessionCallback: (_) => _localUniqueSession,
+          endpointPath: 'movies',
+          methodName: 'nowPlaying',
+          parameters: _i1.testObjectToJson({}),
+          serializationManager: _serializationManager,
+        );
+        var _localReturnValue = await (_localCallContext.method.call(
+          _localUniqueSession,
+          _localCallContext.arguments,
+        ) as _i3.Future<List<_i4.NowPlayingMovie>>);
         return _localReturnValue;
       } finally {
         await _localUniqueSession.close();

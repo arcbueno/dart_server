@@ -1,0 +1,7 @@
+class: NowPlayingMovie
+fields:
+    id: int
+    title: String
+    description: String
+    genres: List<Genre>
+    posterUrl: String

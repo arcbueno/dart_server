@@ -1,0 +1,4 @@
+class: Genre
+fields:
+    id: int
+    name: String
