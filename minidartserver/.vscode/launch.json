@@ -1,0 +1,41 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "minidartserver_client",
+            "cwd": "minidartserver_client",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "minidartserver_flutter",
+            "cwd": "minidartserver_flutter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "minidartserver_flutter (profile mode)",
+            "cwd": "minidartserver_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "minidartserver_flutter (release mode)",
+            "cwd": "minidartserver_flutter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "minidartserver_server",
+            "cwd": "minidartserver_server",
+            "request": "launch",
+            "type": "dart",
+            "program": "bin/main.dart",
+        }
+    ]
+}

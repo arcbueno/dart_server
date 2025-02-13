@@ -1,0 +1,4 @@
+exception: CustomException
+fields:
+  message: String, default="Error has occurred"
+  errorCode: int, default=1001
